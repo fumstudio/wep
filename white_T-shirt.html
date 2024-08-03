@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>White_T-shirt</title>
+  
+  <!-- HTML -->
+  
+
+
+<link rel= "Shortcut icon" type="x-icon" href= "https://i.postimg.cc/XqrhcVpD/20240702-095704.png">
+
+
+ <link href="https://fonts.google.com/share?selection.family=Jersey+25|Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+    <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/catalog.css
+    "> 
+  <link rel="stylesheet" href="css/style1.css">
+  <link rel="stylesheet" href="css/picture.css
+    ">
+      <link rel="stylesheet" href="css/Product.css
+    ">
+      <!-- links-->
+    
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+           <script>
+        $(function(){
+            $("#navbar").load("navbar.html");
+        });
+    </script>
+     <script>
+        $(function(){
+            $("#Whatsapp_button").load("whatsApp_button.html");
+        });
+    </script>
+    <script>
+        $(function(){
+            $("#footer").load("footer.html");
+        });
+    </script>
+      <!--Set Product -->
+     <script>
+        $(function(){
+            $("#Set_Pillow_Case").load("Set_Pillow_Case.html");
+        });
+    </script>
+        <script>
+        $(function(){
+            $("#tote_bag").load("Set_tote_bag.html");
+        });
+</script>
+
+    <style>
+.alert {
+    color: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    animation: colorTransition 5s infinite;
+   
+}
+
+@keyframes colorTransition {
+    0% {
+        background-color: #AAAAAA; /* Initial color */
+    }
+    25% {
+        background-color: #929292 /* Color transition */
+    }
+    50% {
+        background-color: #A3A5BC; /*#B1B1B1 Color transition */
+    }
+    75% {
+        background-color: #BBBCBF; /* Color transition */
+    }
+    100% {
+        background-color: #939397; /* Final color */
+    }
+}
+
+    </style>
+</head>
+
+<body>
+   
+</main>
+<div class="container2">
+ <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+
+
+    <!-- Nav -->
+    <nav class="main-nav">
+          <h1 alt="Microsoft" class="logo">
+<i class="fas fa-arrow-left back-button" onclick="goBack()"></i>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+
+</script>
+ White T-shirt</h1>
+
+
+
+       <div id="navbar"></div>
+</div>
+  <div class="container5">
+    <div class="images5">
+      <div class="image5"><img src="https://iili.io/dIPScbf.jpg" alt="Image 1"></div>
+      <div class="image5"><img src="https://iili.io/dIPS7Jn.jpg" alt="Image 2"></div>
+        <div class="image5"><img src="https://iili.io/dIPSaOG.jpg" alt="Image 3"></div>
+<div class="image5"><img src="https://iili.io/dIPSYRs.jpg" alt="Image 4"></div>
+       <div class="image5"><img src="https://iili.io/dIPS0x4.jpg" alt="Image 5"></div>
+        <div class="image5"><img src="https://iili.io/dIPS1Wl.jpg" alt="Image 6"></div>
+        <div class="image5"><img src="https://iili.io/dIPSMfS.jpg" alt="Image 7"></div>
+        <div class="image5"><img src="https://iili.io/dIPSEs2.jpg" alt="Image 8"></div>
+         <div class="image5"><img src="https://iili.io/dIPSV07.jpg" alt="Image 9"></div>
+          <div class="image5"><img src="https://iili.io/dIPShJe.jpg" alt="Image 10"></div>
+          <div class="image5"><img src="https://iili.io/dIPSwOb.jpg" alt="Image 11"></div>
+           <div class="image5"><img src="https://iili.io/dTECweS.jpg" alt="Image 12"></div>
+         <div class="image5"><img src="https://iili.io/dIsuR0F.jpg" alt="Image 13"></div>
+
+</div>
+    <div class="arrow left" onclick="slide(-1)">&lt;</div>
+  <div class="arrow right" onclick="slide(1)">&gt;</div>
+</div>
+    </div>
+
+  <div class="counter"></div>
+
+  <script>
+   let currentIndex = 0;
+    const images = document.querySelectorAll('.image5');
+    const counter = document.querySelector('.counter');
+    let startX = 0;
+
+    function updateCounter() {
+      counter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    function slide(direction) {
+      currentIndex = currentIndex + direction;
+      if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+      } else if (currentIndex >= images.length) {
+        currentIndex = 0;
+      }
+      const offset = -currentIndex * 100;
+      document.querySelector('.images5').style.transform = `translateX(${offset}%)`;
+      updateCounter();
+    }
+
+    document.querySelector('.container5').addEventListener('touchstart', (event) => {
+      startX = event.touches[0].clientX;
+    });
+
+    document.querySelector('.container5').addEventListener('touchend', (event) => {
+      const endX = event.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (diff > 50) {
+        slide(1); // Slide right
+      } else if (diff < -50) {
+        slide(-1); // Slide left
+      }
+    });
+
+    updateCounter(); // Initial counter update
+  </script>
+
+ <div class="container slider-column">
+<div class="top-section">
+ <div id="share" class="share-icon">
+    <i class="fas fa-share"></i>
+</div>
+  <script>
+document.getElementById('share').addEventListener('click', function() {
+    // Replace the placeholder URL and description with the actual values you want to share
+    var url = encodeURIComponent('https://fumstudio.shop/white_T-shirt.html');
+    var description = encodeURIComponent('Turn Your Favorite Photo into a Fashion Statement');
+    window.open('https://api.whatsapp.com/send?text=' + description + '%0A' + url, '_blank');
+});
+</script>
+    <div class="price-container">  
+<p><del>R599.99</del></p>
+  <span class="price">R319.99</span>
+<br>
+        <span class="free-shipping">Free Shipping</span>
+        <p>3-9 business days.</p>
+
+                <br>
+                <p>Turn Your Favorite Photo into a Fashion Statement! </p> </div>
+        
+  
+  <div class="Details">
+
+
+    <h4 class="small">Details</h4>
+    <div class="space">
+     <h5> SIZE :S,M,L & XL,</h5>
+        <h5>COLOR: White,</h5>
+      <h5> Picture & Massage (back to back)</h5>
+        </div>
+    </div> 
+            
+
+
+<form>
+    <h4 class="smalls">ORDER NOW</h4>
+<p>Custom T-shirt</p>
+
+   <div class="alert"> Select 1 design to style on 1 side.
+   <br>   <br>
+      <div class="alert">OR</div>
+   Select 2 designs to style on both sides.
+   <br><br>
+   If you would like a different style, please reach out to us on WhatsApp.
+   <br>
+   </div>
+    <h4 class="smalls"></h4>
+    <br>
+    <p>Click on 1 or 2 images that you like the most.</p>
+    <div id="images">
+        <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPScbf.jpg" onchange="updateCheckboxes(this)">
+            <img src="https://iili.io/dIPScbf.jpg" alt="Image1">
+        </label>
+
+        <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPS7Jn.jpg" onchange="updateCheckboxes(this)">
+            <img src="https://iili.io/dIPS7Jn.jpg" alt="image 2">
+
+        
+        </label>
+
+        <!-- Add more image containers with checkboxes, images, text, and private links as needed -->
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPSaOG.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPSaOG.jpg" alt="Image 4">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPS0x4.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPS0x4.jpg" alt="Image 5">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPS1Wl.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPS1Wl.jpg" alt="Image 6">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPSMfS.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPSMfS.jpg" alt="Image 7">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPSEs2.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPSEs2.jpg" alt="Image 8">
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPSV07.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPSV07.jpg" alt="Image 9">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPSwOb.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPShJe.jpg" alt="Image 10">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dIPSwOb.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIPSwOb.jpg" alt="Image 11">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="https://iili.io/dTECweS.jpg" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dTECweS.jpg" alt="Image 12">
+
+</label>
+   <label class="image-container">
+            <input type="checkbox" name="option" value="" onchange="updateCheckboxes(this)">    
+        <img src="https://iili.io/dIsuR0F.jpg" alt="Image 13">
+
+</label>
+<label for="size">Select Size:</label>
+<select id="size" name="size">
+  <option value="XL">XL</option>
+  <option value="L">L</option>
+  <option value="M">M</option>
+  <option value="S">S</option>
+</select>
+    <label for="message1">Message 1(front):</label>
+    <textarea id="message1" placeholder="Enter your name here, or message at the T-shirt."></textarea>
+
+    <label for="message2"> Massage 2(back) :</label>
+    <textarea id="message2" placeholder="Enter your name here, or message at the T-shirt."></textarea>
+
+    <button onclick="submitImages()">Submit</button>
+
+    <script>
+let lastSelectedCheckboxes = [];
+
+function updateCheckboxes(checkbox) {
+    if (checkbox.checked) {
+        if (lastSelectedCheckboxes.length >= 2) {
+            const checkboxToRemove = lastSelectedCheckboxes.shift();
+            checkboxToRemove.checked = false;
+            lastSelectedCheckboxes.push(checkbox);
+        } else {
+            lastSelectedCheckboxes.push(checkbox);
+        }
+    } else {
+        const index = lastSelectedCheckboxes.indexOf(checkbox);
+        if (index > -1) {
+            lastSelectedCheckboxes.splice(index, 1);
+        }
+    }
+}
+
+function submitImages() {
+  const selectedSize = document.getElementById('size').value;
+  
+  if (lastSelectedCheckboxes.length === 1) {
+    const selectedMessage = "Size: " + selectedSize + ", Style: " + lastSelectedCheckboxes[0].value;
+    sendMessageToWhatsApp(selectedMessage);
+  } else if (lastSelectedCheckboxes.length === 2) {
+    const frontMessage = "Size: " + selectedSize + ", Front Style: " + lastSelectedCheckboxes[0].value;
+    const backMessage = "Size: " + selectedSize + ", Back Style: " + lastSelectedCheckboxes[1].value;
+    const message = frontMessage + "\n" + backMessage;
+    sendMessageToWhatsApp(message);
+  } else {
+    // Handle other cases as needed
+    alert("Please click on 1 or 2 images that you like the most. It's easy! Just select the styles that catch your eye.");
+  }
+}
+
+function sendMessageToWhatsApp(message) {
+  const additionalMessage1 = document.getElementById('message1').value || 'none';
+  const additionalMessage2 = document.getElementById('message2').value || 'none';
+  const additionalMessage = additionalMessage1 + "\n" + additionalMessage2;
+  const catalogLink = 'View catalog: https://fumstudio.shop/Pillow_case.html';
+  const fullMessage = catalogLink + "\n\n" + message + "\n\nFront Message:" +
+    additionalMessage1 + "\n\nBack Message:" +
+    additionalMessage2 +
+    "\n\n* Hi, send us your photos on WhatsApp.\n\n" +
+    "* The agent will review your orders and make payments.\n\n" +
+    "* Visit the website to make more orders and submit your address.\n\n" +
+    "Website fumstudio.shop.";
+
+  // Replace the following link with your WhatsApp number and message
+  window.open('https://wa.me/27728662309?text=' + encodeURI(fullMessage), '_blank');
+}
+    </script>
+
+</div>
+</div>
+</section>
+ 
+<p id="like" class="like">You might also like</p>
+    <div class="scroll-indicator">
+
+  <div class="container3">
+  <div class="product">
+  
+ <div id="tote_bag"></div>
+ 
+
+</div>
+  <div class="product">
+
+
+<div id="Set_Pillow_Case"></div>
+
+</div>
+
+  
+ </div>
+ </div>
+ 
+
+    </div>
+ <div id="Whatsapp_button"></div>
+       <div id="footer"></div>
+       </div></div>
+ 
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js'></script><script  src="js/script.js"></script>
+
+
+ <script src="js/main.js"></script>
+
+
+
+</body>
+</html>

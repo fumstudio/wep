@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Interactive Modern Search Filter Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" href="css/style1.css">
+   <link rel="stylesheet" href="css/catalog.css">
+ 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <link rel= "Shortcut icon" type="x-icon" href= "https://i.postimg.cc/XqrhcVpD/20240702-095704.png "> 
+
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RJSDSSVMM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9RJSDSSVMM');
+</script>
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MNW5B4W9');</script>
+<!-- End Google Tag Manager -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       <!-- link pages -->
+   <script>
+        $(function(){
+            $("#navbar").load("navbar.html");
+        });
+    </script>
+        <script>
+        $(function(){
+            $("#Whatsapp_button").load("whatsApp_button.html");
+        });
+    </script>
+     <script>
+        $(function(){
+            $("#footer").load("footer.html");
+        });
+    </script>
+
+
+
+<style>
+.container {
+  
+ 
+  max-width: 1100px;
+  margin: auto;
+  
+}
+.way{
+  margin-top: 70px;
+}
+.shipping-option {
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #FF7A00;
+    transition: transform 0.2s;
+}
+
+.shipping-option:active {
+    transform: scale(1.1);
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Modify shadow for the clicked option */
+}
+
+    .shipping-option img {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+    }
+    .selected {
+        border-color: blue;
+    }
+    .form-container {
+        margin-top: 10px;
+
+    }
+    .form-container label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-container input {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        
+    }
+    input[type="submit"].green-text  {
+      margin-top: 10px;
+      width: 100%;
+        padding: 5px 10px;
+        background-color: #FF7A00;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+       border: 1px solid black;
+        margin-bottom: 70px;
+ /* Set the border style for the image */
+    border-radius: 3px;  /* Add border radius for a rounded border effect */
+
+}
+</style>  
+</head>
+
+<body>
+<div class="container2">
+ <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+
+
+    <!-- Nav -->
+ <nav class="main-nav">
+          <h1 alt="Microsoft" class="logo">
+<i class="fas fa-arrow-left back-button" onclick="goBack()"></i>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+
+</script>
+Shipping</h1>
+
+
+
+       <div id="navbar"></div>
+</div>
+<div class="container">
+
+<h1 class="way">Choose Shipping & Fill Form:</h1>
+<p style="color: dimgray;">To collect your items at pep <br>click on the package.</p>
+
+    <div>
+        <form id="shippingForm">
+            <div class="shipping-option" id="shippingOption1">
+                <label>
+                    <input type="radio" name="shippingOption" value="Free Shipping" style="display: none;">
+                    <img src="https://pbs.twimg.com/profile_images/1393106689147166722/hxF67ahS_400x400.jpg"
+                        alt="Option 1">
+                    <span style="color: white;">7-9 Business days<br> <span style="color: wheat; background-color: green;">Free Shipping</span></span>
+                </label>
+            </div>
+            <div class="shipping-option" id="shippingOption2">
+                <label>
+                    <input type="radio" name="shippingOption" value="R29.99" style="display: none;">
+                                <img src="https://pbs.twimg.com/profile_images/1393106689147166722/hxF67ahS_400x400.jpg" alt="Option 3">
+                    <span style="color: white;">3-5 Business days<br><span style="color: white;">R29.99</span></span>
+                </label>
+            </div>
+       <!-- link pages           <div class="shipping-option" id="shippingOption3">
+                <label>
+                    <input type="radio" name="shippingOption" value="R49.99" style="display: none;">
+                    <img src="https://pbs.twimg.com/profile_images/1393106689147166722/hxF67ahS_400x400.jpg" alt="Option 3">
+                    <span style="color: white;">2-4 Business days<br><span style="color: white;">R49.99</span></span>
+                </label>
+            </div> -->
+     <p style="color: dimgray;">Fill the form to get the pep store (location).</p>
+            <div class="form-container">
+   <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" placeholder="Enter your first name"><br>
+
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" type="text" placeholder="Enter your last name"><br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input id="phoneNumber" type="text" placeholder="Enter your phone number"><br>
+
+        <label for="street">Street:</label>
+        <input id="street" type="text" placeholder="Enter your street"><br>
+
+        <label for="building">Building/Complex:</label>
+        <input id="building" type="text" placeholder="Enter your building/complex"><br>
+
+        <label for="city">City:</label>
+        <input id="city" type="text" placeholder="Enter your city"><br>
+
+        <label for="suburb">Suburb:</label>
+        <input id="suburb" type="text" placeholder="Enter your suburb"><br>
+
+        <label for="zipCode">Zip Code:</label>
+        <input id="zipCode" type="text" placeholder="Enter your zip code"><br>
+
+        <label for="state">State:</label>
+        <input id="state" type="text" placeholder="Enter your state"><br>
+
+        <label for="country">Country:</label>
+        <input id="country" type="text" placeholder="Enter your country"><br>
+
+<input type="submit" value="Submit" class="green-text">
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const shippingOptions = document.querySelectorAll('.shipping-option');
+            let selectedOptionValue = 'None'; // Default value if no option is selected
+
+            // Load saved data from local storage
+            const savedUserData = localStorage.getItem('userData');
+            if (savedUserData) {
+                const userData = JSON.parse(savedUserData);
+                document.getElementById('firstName').value = userData.firstName;
+                document.getElementById('lastName').value = userData.lastName;
+                document.getElementById('phoneNumber').value = userData.phoneNumber;
+                document.getElementById('street').value = userData.street;
+                document.getElementById('building').value = userData.building;
+                document.getElementById('city').value = userData.city;
+                document.getElementById('suburb').value = userData.suburb;
+                document.getElementById('zipCode').value = userData.zipCode;
+                document.getElementById('state').value = userData.state;
+                document.getElementById('country').value = userData.country;
+            }
+
+            shippingOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    shippingOptions.forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedOptionValue = this.querySelector('input[name="shippingOption"]').value;
+                });
+            });
+
+            document.getElementById('shippingForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Get user input values
+                const userData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    phoneNumber: document.getElementById('phoneNumber').value,
+                    street: document.getElementById('street').value,
+                    building: document.getElementById('building').value,
+                    city: document.getElementById('city').value,
+                    suburb: document.getElementById('suburb').value,
+                    zipCode: document.getElementById('zipCode').value,
+                    state: document.getElementById('state').value,
+                    country: document.getElementById('country').value
+                };
+
+                // Save user data to local storage
+                localStorage.setItem('userData', JSON.stringify(userData));
+
+                // Construct message for WhatsApp
+  const message = `Selected Shipping Option: ${selectedOptionValue}\n
+                    First Name: ${userData.firstName}\n
+                    Last Name: ${userData.lastName}\n
+                    Phone Number: ${userData.phoneNumber}\n
+                    Street: ${userData.street}\n
+                    Building: ${userData.building}\n
+                    City: ${userData.city}\n
+                    Suburb: ${userData.suburb}\n
+                    Zip Code: ${userData.zipCode}\n
+                    State: ${userData.state}\n
+                    Country: ${userData.country}`;
+
+                const phoneNumber = '0659860276';
+                const encodedMessage = encodeURIComponent(message);
+
+                // Redirect to WhatsApp with the message
+                window.location.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            });
+        });
+    </script>
+</div></div></div>
+  <div id="Whatsapp_button"></div>
+
+
+         <div id="footer"></div>
+</div>
+
+ <script src="js/main.js"></script>
+ 
+ <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MNW5B4W9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+
+</html>
