@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Heart Like Icon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            text-align: center;
+            font-size: 2em;
+        }
+        .heart {
+            cursor: pointer;
+            transition: color 0.3s;
+            color: #ccc; /* Default color for unliked heart */
+        }
+        .liked {
+            color: red; /* Color when liked */
+        }
+    </style>
+</head>
+<body>
+    <div id="heart" class="heart" onclick="toggleLike()">
+        <i class="far fa-heart"></i>
+    </div>
+    <p id="likeCount">Likes: 383</p>
+
+    <script>
+        let likeCount = parseInt(localStorage.getItem('likeCount')) || 383; // Start from saved count or default to 383
+        let liked = localStorage.getItem('liked') === 'true'; // Check if liked
+
+        const likeCountDisplay = document.getElementById('likeCount');
+        const heart = document.getElementById('heart');
+
+        function updateDisplay() {
+            likeCountDisplay.textContent = `Likes: ${likeCount}`;
+            heart.classList.toggle('liked', liked);
+            heart.innerHTML = liked ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+        }
+
+        function toggleLike() {
+            liked = !liked;
+            likeCount += liked ? 1 : -1; // Increment or decrement like count
+            localStorage.setItem('liked', liked);
+            localStorage.setItem('likeCount', likeCount);
+            updateDisplay();
+        }
+
+        function addLikesPeriodically() {
+            setInterval(() => {
+                likeCount += 4; // Add 4 likes every minute
+                localStorage.setItem('likeCount', likeCount);
+                updateDisplay();
+            }, 60000); // 60000 ms = 1 minute
+        }
+
+        // Initialize display and start adding likes
+        updateDisplay();
+        addLikesPeriodically();
+    </script>
+</body>
+</html>
