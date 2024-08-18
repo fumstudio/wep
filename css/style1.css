@@ -241,7 +241,10 @@ ul {
 h2 {
         font-size: 25px;
         color:#FFFFFF;
+    text-align: left; /* Aligns text to the left */
+    
 }
+
 
 p.Special-paragraph{
    color:#FFFFFF;
@@ -249,7 +252,7 @@ p.Special-paragraph{
 }
 h4 {
     font-size: 3em; /* Adjust the font size as needed */
-    text-align: center;
+       /* text-align: center;*/
     color: #333; /* Text color */
     text-transform: uppercase; /* Convert text to uppercase */
     font-family: Arial, sans-serif; /* Specify the font family */
@@ -257,14 +260,14 @@ h4 {
 }
 h5 {
     font-size: 1em; /* Adjust the font size as needed */
-    text-align: center;
+   /* text-align: center;*/
     color: #333; /* Text color */
     text-transform: uppercase; /* Convert text to uppercase */
     font-family: Arial, sans-serif; /* Specify the font family */
     /* Add any additional styling you desire */
 }
 p {
-    text-align: center;
+           text-align: center;
     color: #666; /* Text color */
     font-family: Arial, sans-serif; /* Specify the font family */
     /* Add any additional styling you desire */
@@ -275,14 +278,15 @@ p {
 
 .top-section {
     background-color: #f2f2f2;
-    padding: 20px;
+    padding:20px;
+    margin-top: -10%;
     
 }
+
 .small{
     margin-top: 10%;
   font-size: 20px;
   border-bottom: 2px solid #333;
-
   
 }
 .smalls{
@@ -302,6 +306,7 @@ price-container {
 .price {
     font-size: 24px;
     font-weight: bold;
+
 }
 
 .free-shipping {
@@ -321,4 +326,123 @@ text-align: center;
         width: 80%;
         margin: 20px auto;
     }
+
+        .details {
+            display: none; /* Initially hide the details */
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            color: blue ;
+        }
+ #orderForm {
+            display: none; /* Hide the form initially */
+            margin-top: 20px;
+        }
+          .clickable {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+            
+        }
+           #orderButton {
+            background-color: green; /* Green background */
+            color: white;           /* White text */
+            padding: 15px 30px;    /* Longer sides (top/bottom and left/right) */
+            border: none;          /* No border */
+            border-radius: 5px;    /* Rounded corners */
+            cursor: pointer;        /* Pointer cursor on hover */
+            font-size: 16px;       /* Font size */
+            margin-top: 10px;
+        }
+        
+        #orderButton:hover {
+            background-color: darkgreen; /* Darker green on hover */
+        }
+         .submit-button {
+            background-color: #4CAF50; /* Green background */
+            border: none; /* Remove border */
+            color: white; /* White text */
+            padding: 5px 32px; /* Padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* No underline */
+            display: inline-block; /* Inline-block */
+            font-size: 16px; /* Font size */
+            margin: 4px 2px; /* Margin */
+            cursor: pointer; /* Pointer cursor */
+            border-radius: 8px; /* Rounded corners */
+            transition: background-color 0.3s, transform 0.3s; /* Smooth hover effect */
+           
+        }
+
+        .submit-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: scale(1.05); /* Slightly enlarge */
+        }
+
+        .submit-button:active {
+            transform: scale(0.95); /* Slightly shrink on click */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+     textarea {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            
+            font-size: 16px;
+            resize: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        /* Placeholder styling */
+        textarea::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+  .share-icon {
     
+   margin-left: 210px; /* Adjust the left distance as needed */
+padding-top: 0px; /* Adjust the top distance as needed */
+    z-index: 10;
+  }
+            .heart {
+            cursor: pointer;
+            font-size: 2em;
+            transition: color 0.3s;
+                        height: -100vh;
+        }
+        .liked {
+            color: red; /* Color when liked */
+            
+        }
+        .icon-container {
+    display: flex;
+    align-items: center; /* Vertically centers the items */
+}
+
+.heart, #likeCount {
+    margin-left: 10px; /* Space between the elements */
+}
+
+ #likeCount {
+   color: gray;
+ }
+.hidden {
+            display: none;
+        }
