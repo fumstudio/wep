@@ -230,23 +230,25 @@ function goBack() {
            <span id="likeCount">Likes: 408</span>
 <script>
 let liked = false;
-let likeCount = 80; // Set the initial like count here
-const userId = 'user899'; // Replace this with a dynamic unique identifier for each user
+let likeCount = 462; // Set the initial like count here
+const userId = 'user9'; // Replace this with a dynamic unique identifier for each user
 const uniqueKey = `heartLikeStatus_${userId}`;
 
 // Restore like status from local storage
 function restoreLikeStatus() {
-    const storedLiked = localStorage.getItem(uniqueKey + '.liked');
-    const storedLikeCount = localStorage.getItem(uniqueKey + ".likeCount");
+    const storedLiked = localStorage.getItem(`${uniqueKey}.liked`);
+    const storedLikeCount = localStorage.getItem(`${uniqueKey}.likeCount`);
 
-    if (storedLiked === 'true') {
-        liked = true;
+    if (storedLiked === "true") {
         likeCount = parseInt(storedLikeCount, 10) || likeCount; // Use stored count or initial count
+        liked = true;
         document.getElementById('heart').classList.add("liked");
     } else {
         likeCount = parseInt(storedLikeCount, 10) || likeCount; // Use stored count or initial count
     }
-    document.getElementById('likeCount').textContent = 'Likes: ' + likeCount;
+
+    // Update the like count display
+    document.getElementById('likeCount').textContent = `Likes: ${likeCount}`;
 }
 
 function toggleLike() {
@@ -254,11 +256,11 @@ function toggleLike() {
     likeCount += liked ? 1 : -1;
     const heart = document.getElementById('heart');
     heart.classList.toggle('liked', liked);
-    document.getElementById('likeCount').textContent = 'Likes: ' + likeCount;
+    document.getElementById('likeCount').textContent = `Likes: ${likeCount}`;
 
     // Save state to local storage
-    localStorage.setItem(uniqueKey + '.liked', liked);
-    localStorage.setItem(uniqueKey + ".likeCount", likeCount);
+    localStorage.setItem(`${uniqueKey}.liked`, liked);
+    localStorage.setItem(`${uniqueKey}.likeCount`, likeCount);
 }
 
 // Restore like status on page load
