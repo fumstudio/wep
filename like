@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+
+interface Post {
+  id: number;
+  username: string;
+  content: string;
+}
+
+const SocialMedia = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [newPost, setNewPost] = useState('');
+  const [username, setUsername] = useState('');
+
+  const handlePost = () => {
+    const newPostObject: Post = {
+      id: posts.length + 1,
+      username,
+      content: newPost,
+    };
+    setPosts([...posts, newPostObject]);
+    setNewPost('');
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">Social Media</h1>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="block w-full p-2 mb-2 border border-gray-300 rounded"
+      />
+      <textarea
+        placeholder="What's on your mind?"
+        value={newPost}
+        onChange={(e) => setNewPost(e.target.value)}
+        className="block w-full p-2 mb-2 border border-gray-300 rounded"
+      />
+      <button
+        onClick={handlePost}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Post
+      </button>
+      <div className="mt-4">
+        {posts.map((post) => (
+          <div key={post.id} className="bg-gray-100 p-4 mb-4 rounded">
+            <h2 className="text-lg font-bold">{post.username}</h2>
+            <p>{post.content}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default SocialMedia;
