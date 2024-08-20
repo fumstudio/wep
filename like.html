@@ -1,58 +1,113 @@
-import React, { useState } from 'react';
 
-interface Post {
-  id: number;
-  username: string;
-  content: string;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .post {
+            background: #f1f1f1;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .post h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
 
-const SocialMedia = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [newPost, setNewPost] = useState('');
-  const [username, setUsername] = useState('');
-
-  const handlePost = () => {
-    const newPostObject: Post = {
-      id: posts.length + 1,
-      username,
-      content: newPost,
-    };
-    setPosts([...posts, newPostObject]);
-    setNewPost('');
-  };
-
-  return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Social Media</h1>
-      <input
+<div class="container">
+    <h1>Social Media</h1>
+    <input
         type="text"
+        id="username"
         placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="block w-full p-2 mb-2 border border-gray-300 rounded"
-      />
-      <textarea
+    />
+    <textarea
+        id="newPost"
         placeholder="What's on your mind?"
-        value={newPost}
-        onChange={(e) => setNewPost(e.target.value)}
-        className="block w-full p-2 mb-2 border border-gray-300 rounded"
-      />
-      <button
-        onClick={handlePost}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Post
-      </button>
-      <div className="mt-4">
-        {posts.map((post) => (
-          <div key={post.id} className="bg-gray-100 p-4 mb-4 rounded">
-            <h2 className="text-lg font-bold">{post.username}</h2>
-            <p>{post.content}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+    ></textarea>
+    <button id="postButton">Post</button>
+    <div id="postsContainer"></div>
+</div>
 
-export default SocialMedia;
+<script>
+    const posts = [];
+
+    document.getElementById('postButton').onclick = function() {
+        const username = document.getElementById('username').value;
+        const newPostContent = document.getElementById('newPost').value;
+
+        if (!username || !newPostContent) return; // Prevent empty posts
+
+        const newPostObject = {
+            id: posts.length + 1,
+            username,
+            content: newPostContent,
+        };
+
+        posts.push(newPostObject);
+        document.getElementById('newPost').value = ''; // Clear textarea
+        document.getElementById('username').value = ''; // Clear username
+
+        renderPosts();
+    };
+
+    function renderPosts() {
+        const postsContainer = document.getElementById('postsContainer');
+        postsContainer.innerHTML = ''; // Clear previous posts
+
+        posts.forEach(post => {
+            const postDiv = document.createElement('div');
+            postDiv.className = 'post';
+            postDiv.innerHTML = `
+                <h2>${post.username}</h2>
+                <p>${post.content}</p>
+            `;
+            postsContainer.appendChild(postDiv);
+        });
+    }
+</script>
+
+</body>
+</html>
