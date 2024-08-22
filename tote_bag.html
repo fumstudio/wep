@@ -382,13 +382,13 @@ function sendMessageToWhatsApp(message) {
     const additionalMessage = additionalMessage1 + "\n" + additionalMessage2;
 
    
-    const catalogLink = 'View catalog: https://fumstudio.shop/_Pillow_case.html';
+    const catalogLink = 'View catalog: https://fumstudio.shop/tote_bag.html';
     const fullMessage = catalogLink + "\n\n" + message + "\n\nFront Message : " + additionalMessage1 + "\n\nBack Message :" +
         additionalMessage2 +
          "\n\n* Hi, send us your photos on WhatsApp.\n\n" +
         "* The agent will review your orders and make payments.\n\n" +
         "* Visit the website to make more orders and submit your address.\n\n" +
-        "Website fumstudio.shop.";
+        "fumstudio.";
 
     // Replace the following link with your WhatsApp number and message
     window.open('https://wa.me/27728662309?text=' + encodeURI(fullMessage), '_blank');
