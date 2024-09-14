@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<link rel="stylesheet" href="css/style1.css">
+   <link rel="stylesheet" href="css/catalog.css">
+   
+   <link rel= "Shortcut icon" type="x-icon" href= "https://i.postimg.cc/XqrhcVpD/20240702-095704.png "> 
+
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RJSDSSVMM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9RJSDSSVMM');
+</script>
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MNW5B4W9');</script>
+<!-- End Google Tag Manager -->
+
+ 
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(function(){
+            $("#navbar").load("navbar.html");
+        });
+    </script>
+            <script>
+        $(function(){
+            $("#Whatsapp_button").load("whatsApp_button.html");
+        });
+    </script>
+        <script>
+        $(function(){
+            $("#footer").load("footer.html");
+        });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var button = document.getElementById('selectDesignButton');
+    if (button) {
+      button.click();
+    }
+  });
+</script>
+<style>
+.main-nav {
+
+}
+    /* Basic styling */
+#loadingScreen, #secondLoadingScreen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+
+}
+
+    #deleteBtn {
+        display: none;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    #uploadButton {
+        background-color: #6DBFE5;
+        color: white;
+        border: 2px solid white;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    #uploadedImageContainer {
+        display: none;
+        margin-top: 20px;
+    }
+    #uploadedImage {
+        max-width: 100%;
+        height: auto;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: #f9f9f9;
+        margin: 10px;
+    }
+    .send-button {
+        display: none;
+        margin: 10px;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        background-color: #e0e0e0;
+        cursor: pointer;
+    }
+    /* Design modal styles */
+    #designModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+    #designModalContent {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+    }
+    #designModalClose {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #fff;
+        border: none;
+        border-radius: 50%;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .design-option {
+        display: inline-block;
+        margin: 10px;
+        position: relative;
+    }
+    .design-option input[type="radio"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+    }
+    .design-option input[type="radio"]:checked + label {
+        border: 2px solid #6DBFE5; /* Highlight color for selected design */
+    }
+    .design-option label {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+         /* Default border color */
+        border-radius: 8px;
+        width: 100px;
+        height: 100px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+    .design-option img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    #designImage {
+        display: block;
+        margin-top: 20px;
+        max-width: 100px;
+        height: auto;
+    }
+    /* Modal message styling */
+    #messageModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        z-index: 11111;
+    }
+    #messageContent {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        position: relative;
+        width: 80%;
+        max-width: 400px;
+        
+    }
+    #messageOkButton {
+        background: #6DBFE5;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        
+    }
+    /* Alert modal styles */
+    #alertModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      
+    }
+    #alertContent {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        position: relative;
+        width: 80%;
+        max-width: 400px;
+          
+    }
+    #alertOkButton {
+
+    background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+    /* Additional message styling */
+    #additionalMessageContainer {
+        display: none;
+        margin-top: 20px;
+        text-align: center;
+
+
+    }
+    #additionalMessage {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+
+
+    }
+
+/* Container styling */
+#uploadedImageContainer {
+width: 80%; /* Adjust the width as needed */
+max-width: 400px; /* Set a maximum width */
+margin: 0 auto; /* Center the container horizontally */
+padding: 20px; /* Add some padding */
+border-radius: 10px; /* Rounded corners */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+background: #f9f9f9; /* Light background color */
+text-align: center; /* Center-align the image and button */
+
+}
+
+/* Wrapper for the image */
+#imageWrapper {
+width: 100%;
+padding-top: 100%; /* Creates a square aspect ratio */
+position: relative; /* Allows absolute positioning of the image */
+overflow: hidden; /* Hides overflow */
+border-radius: 8px; /* Rounded corners */
+
+
+}
+
+/* Style for the image */
+#uploadedImage {
+position: absolute; /* Position inside the wrapper */
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover; /* Ensures the image covers the area without distortion */
+border: 2px solid #ddd; /* Border around the image */
+transition: transform 0.3s ease; /* Smooth transition effect */
+
+
+}
+
+
+/* Modal styling */
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 3000; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Scroll if needed */
+background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+display: flex; /* Flexbox for centering content */
+align-items: center; /* Vertically center the content */
+justify-content: center; /* Horizontally center the content */
+}
+
+/* Modal content (image) */
+.modal-content {
+max-width: 90%; /* Ensure the image is responsive */
+max-height: 80%; /* Ensure the image is responsive */
+border-radius: 10px; /* Rounded corners */
+position: relative; /* Allows positioning of the close button */
+}
+
+/* Close button styling */
+.close {
+position: absolute;
+top: 40px;
+right: 20px;
+color: #fff;
+font-size: 40px;
+font-weight: bold;
+cursor: pointer;
+z-index: 2; /* Ensure it sits on top of other content */
+display: none; /* Hidden by default */
+}
+
+/* Show close button when modal is visible */
+.modal.show .close {
+display: block; /* Show close button */
+}
+
+/* Close button hover effect */
+.close:hover,
+.close:focus {
+color: #bbb; /* Change color on hover */
+text-decoration: none;
+cursor: pointer;
+}
+.button-container1 {
+        display: flex;
+        gap: 10px;
+}
+.button-container {
+        display: flex;
+        gap: 10px;
+
+
+}
+
+
+    .custom-file-upload {
+        background-color: #FF54A7;
+        color: white;
+
+border: 2px solid white; /* Add a border */
+border-radius: 8px; /* Rounded corners */
+padding: 10px 20px;
+cursor: pointer;
+margin-top: 10px;
+transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+
+}
+
+
+
+    .send-button {
+        background-color: #89D358;
+color: white;
+border: 2px solid white; /* Add a border */
+border-radius: 8px; /* Rounded corners */
+padding: 10px 20px;
+cursor: pointer;
+margin-top: 10px;
+transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+
+  display: none;
+  margin-top: 10px;
+}
+/* Basic styling for the modal */
+    #confirmationModal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
+    #modalBox {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    #yesBtn{
+   background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 5;
+    }   
+    #noBtn{
+    background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+        z-index: 5;
+    }
+    #nextButton{
+                background: #6DBFE5;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+    }  
+    .element {
+margin-bottom: 80px; /* Adjust the value as needed */
+margin-top: 1px;
+
+}
+.centerContainer {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 10vh;
+margin-bottom: 50px;
+position: absolute; /* Position inside the wrapper */
+top: 0;
+left: 0;
+width: 100%;
+height: 80%;
+object-fit: cover; /* Ensures the image covers the area without distortion */
+
+transition: transform 0.3s ease; /* Smooth transition effect */
+
+
+
+}
+.background {
+width: 100%;
+height: 850px; /* Adjust height as needed or use a percentage for responsiveness */
+background-image: url('20240909_170737.jpg');
+background-size: cover; /* Ensures the image covers the container */
+background-position: center; /* Centers the image in the container */
+background-repeat: no-repeat; /* Prevents the image from repeating */
+
+}
+#messageDesignImage {
+    max-width: 150px; /* Adjust the width as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+#backButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #6DBFE5;
+    cursor: pointer;
+    margin-right: 300px;
+}
+
+#backButton i {
+    transform: rotate(180deg); /* Rotate the arrow to point left */
+}
+
+/* Style for the arrow */
+.image-container img::after {
+  content: '';
+  position: absolute;
+  top: 10px; /* Adjust this value for vertical positioning */
+  right: 10px; /* Adjust this value for horizontal positioning */
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent; /* Adjust this value for arrow size */
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid black; /* Adjust this value for arrow color */
+}
+</style>
+</head>
+<body>
+<div class="background">
+<div class="container2">
+
+<div class="menu-btn">
+<i class="fas fa-bars fa-2x"></i>
+</div>
+
+
+<!-- Nav -->
+
+<nav class="main-nav">
+          <h1 alt="Microsoft" class="logo">
+<i class="fas fa-arrow-left back-button" onclick="goBack()"></i>
+<!-- Navigation content -->
+
+      
+
+<script>
+
+function goBack() {
+window.history.back();
+}
+
+</script>
+Personalize</h1>
+    <div id="navbar"></div>
+
+</div>
+    </nav>
+<br>        <br>        <br>  <br> 
+     <!-- Design Selector Button -->
+
+
+   <div class="element">
+
+<!-- Design Modal -->
+<div id="designModal">
+    <div id="designModalContent">
+        <img id="designImage" src="" alt="Selected Design">
+        <button id="designModalClose" aria-label="Close Design Selection">✖</button>
+        <div class="design-option">
+            <input type="radio" id="design1" name="design" value="design1" data-image="https://iili.io/dIPS7Jn.jpg" data-name="Design 1">
+            <label for="design1">
+                <img src="https://iili.io/dIPS7Jn.jpg" alt="Design 1"> Design 1
+            </label>
+        </div>
+        <div class="design-option">
+            <input type="radio" id="design2" name="design" value="design2" data-image="https://iili.io/dTGlAKl.jpg" data-name="Design 2">
+            <label for="design2">
+                <img src="https://iili.io/dTGlAKl.jpg" alt="Design 2"> Design 2
+            </label>
+        </div>
+        <button id="nextButton" style="display: none;">Next</button>
+    </div>
+</div>
+
+<!-- Message Modal -->
+    <div id="messageModal">
+        <div id="messageContent">
+            <button id="backButton" onclick="goBackToDesign()"><i class="fas fa-arrow-right"></i></button>
+            <img id="messageDesignImage" src="" alt="Selected Design">
+            <p>Please enter a special name, message, or date to personalize the design.</p>
+            <textarea id="additionalMessage" placeholder="Click here to write..."></textarea>
+            <button id="messageOkButton">Submit to WhatsApp <i class="fas fa-share"></i></button>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div id="alertModal">
+        <div id="alertContent">
+            <p style="color: black;">Please enter a special name, message, or date to personalize the design.</p>
+            <button id="alertOkButton">OK</button>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <div class="centerContainer">
+            <button id="selectDesignButton" class="custom-file-upload">Choose Design</button>
+        </div>
+    </div>
+
+    <script>
+const pageIdentifier = '406';
+const localStoragePrefix = page${pageIdentifier}-;
+
+const selectDesignButton = document.getElementById('selectDesignButton');
+const designModal = document.getElementById('designModal');
+const designModalClose = document.getElementById('designModalClose');
+const designImage = document.getElementById('designImage');
+const nextButton = document.getElementById('nextButton');
+const messageModal = document.getElementById('messageModal');
+const messageOkButton = document.getElementById('messageOkButton');
+const alertModal = document.getElementById('alertModal');
+const alertOkButton = document.getElementById('alertOkButton');
+const additionalMessage = document.getElementById('additionalMessage');
+const messageDesignImage = document.getElementById('messageDesignImage'); // Get the image in the message modal
+let selectedDesign = null;
+
+const phoneNumber = '0659860276'; // Your WhatsApp number
+
+// Load saved state from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+    const savedDesign = localStorage.getItem(${localStoragePrefix}selectedDesign);
+    const savedMessage = localStorage.getItem(${localStoragePrefix}additionalMessage);
+
+    if (savedDesign) {
+        selectedDesign = savedDesign;
+        document.querySelector(input[name="design"][data-name="${savedDesign}"]).checked = true;
+        designImage.src = document.querySelector(input[name="design"][data-name="${savedDesign}"]).dataset.image;
+        selectDesignButton.textContent = Selected Design: ${selectedDesign};
+        checkDesignSelection(); // Ensure Next button visibility is correct
+    }
+
+    if (savedMessage) {
+        additionalMessage.value = savedMessage;
+    }
+});
+
+// Function to check design selection
+function checkDesignSelection() {
+    nextButton.style.display = selectedDesign ? 'block' : 'none';
+}
+
+// Show the design selection modal
+selectDesignButton.addEventListener('click', () => {
+    designModal.style.display = 'flex';
+});
+
+// Close the design modal
+designModalClose.addEventListener('click', () => {
+    designModal.style.display = 'none';
+});
+
+// Handle design selection
+designModal.addEventListener('change', (event) => {
+    if (event.target.name === 'design') {
+        const option = event.target;
+        if (option.checked) {
+            selectedDesign = option.dataset.name;
+            if (designImage) {
+                designImage.src = option.dataset.image;
+            }
+            selectDesignButton.textContent = Selected Design: ${selectedDesign};
+            localStorage.setItem(${localStoragePrefix}selectedDesign, selectedDesign); // Save to localStorage
+        }
+        checkDesignSelection(); // Update visibility of Next button
+    }
+});
+
+// Show message modal when "Next" button is clicked
+nextButton.addEventListener('click', () => {
+    if (selectedDesign) {
+        designModal.style.display = 'none';
+        messageModal.style.display = 'flex';
+        if (messageDesignImage) {
+            messageDesignImage.src = designImage.src; // Update the image in the message modal
+        }
+    } else {
+        alert('Please select a design before proceeding.');
+    }
+});
+
+// Submit to WhatsApp
+messageOkButton.addEventListener('click', () => {
+    const message = additionalMessage.value.trim() || 'none'; // Default to 'none' if textarea is empty
+    if (selectedDesign) {
+        if (message === 'none') { // Check if the message is empty
+            // Show the alert modal
+            alertModal.style.display = 'flex';
+        } else {
+            const catalogLink = 'https://fumstudio.shop/Custom_tote_bag_front_text.html'; // Replace with your actual catalog link
+            const whatsappUrl = https://api.whatsapp.com/send?phone=${phoneNumber}&text=I%20would%20like%20to%20order%20a%20personalized%20tote%20bag%20with%20the%20following%20details:%0A%0ACatalog%20link:%20${encodeURIComponent(catalogLink)}%0A%0ADesign:%20${encodeURIComponent(selectedDesign)}%0A%0AMessage:%20${encodeURIComponent(message)};
+            window.open(whatsappUrl, '_blank');
+            messageModal.style.display = 'none';
+        }
+    } else {
+        alert('Please select a design before submitting.');
+    }
+});
+
+// Close alert modal when OK button is clicked
+alertOkButton.addEventListener('click', () => {
+    alertModal.style.display = 'none';
+});
+
+function goBackToDesign() {
+    messageModal.style.display = 'none';
+    designModal.style.display = 'flex';
+}
+    </script>
+
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var button = document.getElementById('selectDesignButton');
+      if (button) {
+        button.click();
+      }
+    });
+  </script>
+
+
+</div></div></div></div>
+
+   <div id="Whatsapp_button"></div>
+           <div id="footer"></div>
+  </div>  </div>  </div>  </div>
+ <script src="js/main.js"></script>
+ 
+ <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MNW5B4W9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>
