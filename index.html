@@ -1,109 +1,421 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" >
 <head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Fum.studio</title>
- <link rel= "Shortcut icon" type="x-icon" href= "https://i.postimg.cc/XqrhcVpD/20240702-095704.png">
- 
- <link rel="stylesheet" el="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
- <style>
- @keyframes fadein {
- 0% {
- opacity: 0;
- }
- 100% {
- opacity: 1;
- }
- }
+  <meta charset="UTF-8">
+  <title>CodePen - fumstudio</title>
+  
 
- @keyframes connect {
- 0% {
- transform: translateY(-50px);
- }
- 100% {
- transform: translateY(0);
- }
- }
-
- .content {
- text-align: center;
- display: none;
- }
-
- .content.show {
- display: block;
- animation: fadein 1s forwards;
- }
-
- .gift {
- font-size: 50px;
- opacity: 0;
- transition: opacity 1s, transform 1s;
- }
-
- 
-
- .content.show {
- display: block;
- animation: fadein 1s forwards;
- }
-
- .gift {
- font-size: 50px;
- opacity: 0;
- transition: opacity 1s, transform 1s;
- }
-
-
- h1 {
- font-family: Arial, sans-serif;
- font-size: 28px;
- margin-top: -7px;
- opacity: 0;
- transition: opacity 1s, transform 1s;
- }
-
- .content.show .gift {
- opacity: 1;
- animation: connect 1s forwards;
- }
-
- .content.show h1 {
- opacity: 1;
- animation: connect 1s forwards;
- }
-
- body {
- background-color: #f5f5f5;
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
- height: 100vh;
- margin: 0;
- }
- </style>
 </head>
-
 <body>
- <div class="content">
-    <i class="gift fas fa-gift"></i>
- <h1>Fum.studio</h1>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Section with Firebase Auth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .comment {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .comment img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
 
- </div>
+        .user-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background-color: #e0e0e0; 
+            color: #888; 
+            font-size: 20px; 
+        }
 
- <script>
- setTimeout(function(){
- document.querySelector('.content').classList.add('show');
- }, 1000); // Show content after 1 second
+        .replies {
+            margin-left: 50px; 
+        }
 
- setTimeout(function(){
- window.location.href = "catalog.html";
- }, 3000); // Redirect after 3 seconds
- </script>
+        .reply-input {
+            width: 80%;
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+        import { getDatabase, ref as dbRef, onValue, set, get } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js';
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqm1p_jkuS9BgDFTlUIZ1R1OV61Qdt1Ok",
+            authDomain: "login-2ff4a.firebaseapp.com",
+            projectId: "login-2ff4a",
+            storageBucket: "login-2ff4a.appspot.com",
+            messagingSenderId: "177553893792",
+            appId: "1:177553893792:web:fdc0766a083fac3008dcc5",
+            measurementId: "G-QT1RW7ECT0"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+        const storage = getStorage(app);
+
+        // Handle authentication state
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid; // This is the user's ID
+                console.log("User ID:", uid);
+                loadUserProfile(uid);
+                loadComments();
+            } else {
+                // User is signed out
+                document.getElementById("user-info").textContent = "Not logged in.";
+                document.getElementById("comments").innerHTML = "";
+            }
+        });
+
+        // Load user profile
+        async function loadUserProfile(uid) {
+            const userSnapshot = await get(dbRef(database, 'users/' + uid));
+            if (userSnapshot.exists()) {
+                const userData = userSnapshot.val();
+                document.getElementById("user-info").textContent = `Logged in as: ${userData.firstName} ${userData.lastName} (${userData.email})`;
+                document.getElementById("first-name").value = userData.firstName;
+                document.getElementById("last-name").value = userData.lastName;
+                document.getElementById("profile-photo").src = userData.photoURL || ''; // Set photo if available
+            }
+        }
+
+        // Load comments from database
+        function loadComments() {
+            const commentsRef = dbRef(database, 'comments/');
+            onValue(commentsRef, (snapshot) => {
+                const commentsDiv = document.getElementById("comments");
+                commentsDiv.innerHTML = ""; // Clear existing comments
+                snapshot.forEach(childSnapshot => {
+                    const commentData = childSnapshot.val();
+                    const commentElement = document.createElement("div");
+                    commentElement.className = "comment";
+
+                    const img = document.createElement("img");
+                    img.src = commentData.photoURL || ''; // Default to empty if no photoURL
+                    img.alt = `${commentData.firstName} ${commentData.lastName}'s photo`;
+                    img.onerror = () => { // Handle error loading image
+                        img.src = "https://via.placeholder.com/40"; // Use a placeholder image or icon URL
+                    };
+
+                    if (!commentData.photoURL) {
+                        const icon = document.createElement("i");
+                        icon.className = "fas fa-user user-icon"; // Font Awesome icon with round background
+                        commentElement.appendChild(icon);
+                    } else {
+                        commentElement.appendChild(img);
+                    }
+
+                    const textElement = document.createElement("span");
+                    textElement.textContent = `${commentData.firstName} ${commentData.lastName}: ${commentData.text}`;
+                    commentElement.appendChild(textElement);
+
+                    // Additional buttons for editing and deleting
+                    const user = auth.currentUser;
+                    if (user && commentData.user === user.email) {
+                        const editButton = document.createElement("button");
+                        editButton.textContent = "Edit";
+                        editButton.onclick = () => editComment(childSnapshot.key, commentData.text);
+
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.onclick = () => deleteComment(childSnapshot.key);
+
+                        commentElement.appendChild(editButton);
+                        commentElement.appendChild(deleteButton);
+                    }
+
+                    // Add Replies Section
+                    const repliesElement = document.createElement("div");
+                    repliesElement.className = "replies";
+                    commentElement.appendChild(repliesElement);
+
+                    // Load existing replies for this comment
+                    loadReplies(childSnapshot.key, repliesElement);
+
+                    // Add reply input and button
+                    const replyInput = document.createElement("input");
+                    replyInput.type = "text";
+                    replyInput.className = "reply-input";
+                    replyInput.placeholder = "Write your reply...";
+                    replyInput.setAttribute("data-comment-id", childSnapshot.key);
+
+                    const replyButton = document.createElement("button");
+                    replyButton.textContent = "Reply";
+                    replyButton.setAttribute("data-comment-id", childSnapshot.key);
+                    replyButton.onclick = () => submitReply(childSnapshot.key, replyInput);
+
+                    repliesElement.appendChild(replyInput);
+                    repliesElement.appendChild(replyButton);
+
+                    commentsDiv.appendChild(commentElement);
+                });
+            });
+        }
+
+        // Load replies for a specific comment
+        function loadReplies(commentId, repliesElement) {
+            const repliesRef = dbRef(database, 'comments/' + commentId + '/replies');
+            onValue(repliesRef, (snapshot) => {
+                repliesElement.innerHTML = ''; // Clear existing replies
+                snapshot.forEach(childSnapshot => {
+                    const replyData = childSnapshot.val();
+                    const replyElement = document.createElement("div");
+                    replyElement.className = "reply";
+
+                    const img = document.createElement("img");
+                    img.src = replyData.photoURL || '';
+                    img.alt = `${replyData.firstName} ${replyData.lastName}'s photo`;
+                    img.onerror = () => {
+                        img.src = "https://via.placeholder.com/40";
+                    };
+                    replyElement.appendChild(img);
+
+                    const textElement = document.createElement("span");
+                    textElement.textContent = `${replyData.firstName} ${replyData.lastName}: ${replyData.text}`;
+                    replyElement.appendChild(textElement);
+
+                    // Add delete button for replies
+                    const user = auth.currentUser;
+                    if (user && (replyData.user === user.email || commentId === replyData.commentId)) {
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        // Pass both commentId and replyId to the deleteReply function
+                        deleteButton.onclick = () => deleteReply(commentId, childSnapshot.key, commentId); 
+                        replyElement.appendChild(deleteButton);
+                    }
+
+                    repliesElement.appendChild(replyElement);
+                });
+            });
+        }
+
+        // Submit a reply to a comment
+        function submitReply(commentId, replyInput) {
+            const replyText = replyInput.value;
+            const user = auth.currentUser;
+
+            if (replyText && user) {
+                const userSnapshot = get(dbRef(database, 'users/' + user.uid));
+                userSnapshot.then(async snapshot => {
+                    const { firstName, lastName, photoURL } = snapshot.val();
+                    // Fetch the comment data to check if the user is replying to their own comment
+                    const commentRef = dbRef(database, 'comments/' + commentId);
+                    const commentData = await get(commentRef);
+                    if (commentData.exists()) {
+                        // If the user is trying to reply to their own comment, show an error
+                        if (user.email === commentData.val().user) {
+                            alert('You cannot reply to your own comment.');
+                            return;
+                        }
+
+                        // Otherwise, submit the reply
+                        const replyRef = dbRef(database, 'comments/' + commentId + '/replies/' + Date.now());
+                        set(replyRef, {
+                            text: replyText,
+                            user: user.email,
+                            firstName: firstName,
+                            lastName: lastName,
+                            photoURL: photoURL,
+                            commentId: commentId // Add commentId to the reply
+                        });
+                        replyInput.value = ''; // Clear the reply input
+                    }
+                });
+            }
+        }
+
+        // Delete a reply (now with the ability to delete replies to your own comments)
+        async function deleteReply(commentId, replyId, originalCommentId) {
+            const user = auth.currentUser;
+            if (user) {
+                // Fetch the comment data to check if the reply is to this user's comment
+                const commentRef = dbRef(database, 'comments/' + originalCommentId); 
+                const commentData = await get(commentRef);
+                if (commentData.exists()) {
+                    if (commentData.val().user === user.email) { 
+                        // If the reply is to this user's comment, allow deletion
+                        const replyRef = dbRef(database, 'comments/' + commentId + '/replies/' + replyId);
+                        set(replyRef, null); 
+                    } else {
+                        // If the reply is not to this user's comment, show an error
+                        alert("You can only delete replies to your own comments.");
+                    }
+                } else {
+                    // Handle the case where the comment doesn't exist (error)
+                    console.error("Comment not found.");
+                }
+            }
+        }
+
+        // Upload profile photo and update comments
+        document.getElementById("upload-photo").addEventListener("change", async (event) => {
+            const file = event.target.files[0];
+            const user = auth.currentUser;
+            if (file && user) {
+                const storagePath = 'profilePhotos/' + user.uid;
+                const photoRef = storageRef(storage, storagePath);
+                await uploadBytes(photoRef, file);
+                const photoURL = await getDownloadURL(photoRef);
+
+                // Update user profile photo
+                await set(dbRef(database, 'users/' + user.uid), {
+                    firstName: document.getElementById("first-name").value,
+                    lastName: document.getElementById("last-name").value,
+                    email: user.email,
+                    photoURL: photoURL,
+                });
+
+                // Update all comments with the new photo URL
+                const commentsRef = dbRef(database, 'comments/');
+                const snapshot = await get(commentsRef);
+                snapshot.forEach(async (childSnapshot) => {
+                    const commentData = childSnapshot.val();
+                    if (commentData.user === user.email) {
+                        await set(dbRef(database, 'comments/' + childSnapshot.key), {
+                            ...commentData,
+                            photoURL: photoURL, // Update with new photo URL
+                        });
+                    }
+                });
+
+                loadUserProfile(user.uid); // Refresh the user profile display
+            }
+        });
+
+        // Submit comment
+        document.getElementById("submit-comment").addEventListener("click", async () => {
+            const commentInput = document.getElementById("comment-input");
+            const commentText = commentInput.value;
+            const user = auth.currentUser;
+
+            if (commentText && user) {
+                const userSnapshot = await get(dbRef(database, 'users/' + user.uid));
+                const { firstName, lastName, photoURL } = userSnapshot.val();
+
+                const commentRef = dbRef(database, 'comments/' + Date.now());
+                await set(commentRef, {
+                    text: commentText,
+                    user: user.email,
+                    firstName: firstName,
+                    lastName: lastName,
+                    photoURL: photoURL, // Save the photo URL with the comment
+                });
+                commentInput.value = ""; // Clear input
+            }
+        });
+
+        // User sign-in
+        document.getElementById("login-btn").addEventListener("click", async () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            await signInWithEmailAndPassword(auth, email, password);
+        });
+
+        // User sign-up
+        document.getElementById("signup-btn").addEventListener("click", async () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const firstName = document.getElementById("first-name").value;
+            const lastName = document.getElementById("last-name").value;
+
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const userId = userCredential.user.uid;
+
+            // Store the first name, last name, and email in the database
+            await set(dbRef(database, 'users/' + userId), {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                photoURL: '', // Initialize with no photo
+            });
+        });
+
+        // Update user profile
+        document.getElementById("update-profile").addEventListener("click", async () => {
+            const user = auth.currentUser;
+            const firstName = document.getElementById("first-name").value;
+            const lastName = document.getElementById("last-name").value;
+
+            if (user) {
+                await set(dbRef(database, 'users/' + user.uid), {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: user.email,
+                });
+                loadUserProfile(user.uid); // Refresh the user profile display
+            }
+        });
+
+        // User sign-out
+        document.getElementById("logout-btn").addEventListener("click", async () => {
+            await signOut(auth);
+        });
+
+        // Edit comment function
+        async function editComment(commentId, oldText) {
+            const newText = prompt("Edit your comment:", oldText);
+            if (newText) {
+                const user = auth.currentUser;
+                const userSnapshot = await get(dbRef(database, 'users/' + user.uid));
+                const { firstName, lastName, photoURL } = userSnapshot.val();
+
+                await set(dbRef(database, 'comments/' + commentId), {
+                    text: newText,
+                    user: user.email,
+                    firstName: firstName,
+                    lastName: lastName,
+                    photoURL: photoURL,
+                });
+            }
+        }
+
+        // Delete comment function
+        function deleteComment(commentId) {
+            set(dbRef(database, 'comments/' + commentId), null); // Deletes the comment
+        }
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+<body>
+    <div id="user-info"></div>
+    <div>
+        <input type="text" id="first-name" placeholder="First Name">
+        <input type="text" id="last-name" placeholder="Last Name">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <input type="file" id="upload-photo" accept="image/*">
+        <button id="signup-btn">Sign Up</button>
+        <button id="login-btn">Login</button>
+        <button id="update-profile">Update Profile</button>
+        <button id="logout-btn">Logout</button>
+    </div>
+    <div id="comment-section">
+        <h2>Comments</h2>
+        <div id="comments"></div>
+        <textarea id="comment-input" placeholder="Type your comment..."></textarea>
+        <button id="submit-comment">Submit</button>
+    </div>
 </body>
-
+</html>
+<!-- partial -->
+  
+</body>
 </html>
